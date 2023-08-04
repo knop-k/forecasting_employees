@@ -51,3 +51,4 @@ To auto-generate API document for your project, run:
 ```bash
 make docs
 ```
+## E-mail:
