@@ -1,3 +1,8 @@
-use_columns: 
-  - col1
-  - col2
+target: LeaveOrNot
+features:
+  - City
+  - PaymentTier
+  - Age
+  - Gender
+  - EverBenched
+  - ExperienceInCurrentDomain
