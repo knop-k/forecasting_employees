@@ -31,8 +31,14 @@ def add_dummy_data(df: pd.DataFrame):
         "Age": [0, 0, 0],
         "ExperienceInCurrentDomain": [0, 0, 0],
     }
-    rows1 = {"City": "Pune", "PaymentTier": 0, "Age": 0, "Gender": "Female", "EverBenched": "No",
-             "ExperienceInCurrentDomain": 0}
+    rows1 = {
+        "City": "Pune",
+        "PaymentTier": 0,
+        "Age": 0,
+        "Gender": "Female",
+        "EverBenched": "No",
+        "ExperienceInCurrentDomain": 0,
+    }
 
     dummy_df = pd.DataFrame(rows)
     return pd.concat([df, dummy_df])
@@ -57,8 +63,7 @@ def transform_data(df: pd.DataFrame):
 
 """model = bentoml.picklable_model.load_runner(
     f"{MODDEL_NAME}:latest")"""
-model = bentoml.xgboost.load_runner(
-    f"{MODEL_NAME}:latest")
+model = bentoml.xgboost.load_runner(f"{MODEL_NAME}:latest")
 
 # Create service with the model
 service = bentoml.Service("predict_employee", runners=[model])

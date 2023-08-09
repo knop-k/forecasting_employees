@@ -1,6 +1,7 @@
 import mlflow
 from dagshub import DAGsHubLogger
 
+
 class BaseLogger:
     def __init__(self):
         self.logger = DAGsHubLogger()

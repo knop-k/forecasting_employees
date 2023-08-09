@@ -46,7 +46,7 @@ def get_features_step(steps_data):
             "Age": Column(float, Check.greater_than(10)),
             "ExperinceInCurrentDomain": Column(
                 float, Check.greater_than_or_equal_to(0)
-            )
+            ),
         }
     )
     schema.validate(X)

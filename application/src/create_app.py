@@ -18,9 +18,7 @@ def get_inputs():
         options=[1, 2, 3],
         help="payment tier: 1: highest 2: mid level 3:lowest",
     )
-    data["Age"] = st.number_input(
-        "Current Age", min_value=15, step=1, value=20
-    )
+    data["Age"] = st.number_input("Current Age", min_value=15, step=1, value=20)
     data["Gender"] = st.selectbox("Gender", options=["Male", "Female"])
     data["EverBenched"] = st.selectbox(
         "Ever Kept Out of Projects for 1 Month or More", options=["No", "Yes"]
@@ -42,7 +40,7 @@ def write_predictions(data: dict):
         ).text[0]
 
         if prediction == "0":
-             st.write("This employee is predicted stay more than two years.")
+            st.write("This employee is predicted stay more than two years.")
         else:
             st.write("This employee is predicted to leave in two years.")
 
