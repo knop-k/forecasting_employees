@@ -33,9 +33,9 @@ def predict(model: XGBClassifier, X_test: pd.DataFrame):
 def log_params(model: XGBClassifier, features: list):
     logger.log_params({"model_class": type(model).__name__})
     model_params = model.get_params()
+    print(model_params)
 
     for arg, value in model_params.items():
-        print({arg: value})
         logger.log_params({arg: value})
 
     logger.log_params({"features": features})
@@ -48,8 +48,9 @@ def log_metrics(**metrics: dict):
 @hydra.main(config_path="../../config", config_name="main", version_base=None)
 def evaluate(config: DictConfig):
     mlflow.set_tracking_uri(config.mlflow_tracking_ui)
-    os.environ["MLFLOW_TRACKING_USERNAME"] = config.mlflow_USERNAME
-    os.environ["MLFLOW_TRACKING_PASSWORD"] = config.mlflow_PASSWORD
+    mlflow.set_experiment('employee-churn')
+    # os.environ["MLFLOW_TRACKING_USERNAME"] = config.mlflow_USERNAME
+    # os.environ["MLFLOW_TRACKING_PASSWORD"] = config.mlflow_PASSWORD
 
     with mlflow.start_run():
         # Load data and model
@@ -68,8 +69,13 @@ def evaluate(config: DictConfig):
         print(f"Accuracy Score of this model is {accuracy}.")
 
         # Log metrics
-        log_params(model, config.process.features)
+        log_params(model=model, features=config.process.features)
         log_metrics(f1_score=f1, accuracy_score=accuracy)
+
+        # Log in local dir
+        mlflow.sklearn.log_model(model, "model")
+        mlflow.log_metric("f1_score", f1)
+        mlflow.log_metric("accuracy_score", accuracy)
 
 
 if __name__ == "__main__":

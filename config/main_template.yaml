@@ -31,7 +31,10 @@ model:
   name: xgboost
   path: ${model.dir}/${model.name}
 
+# For tracking on dagshub
+#mlflow_tracking_ui:
+#mlflow_USERNAME:
+#mlflow_PASSWORD:
 
-mlflow_tracking_ui:
-mlflow_USERNAME:
-mlflow_PASSWORD:
+# For tracking on local dir
+#mlflow_tracking_ui: file:\C:\Projects\forecasting_employees\mlruns
