@@ -9,7 +9,6 @@ from training.src.train_model import load_data
 
 
 def test_xgboost():
-
     with initialize(version_base=None, config_path="../../config"):
         config = compose(config_name="main")
 
