@@ -48,9 +48,9 @@ def log_metrics(**metrics: dict):
 @hydra.main(config_path="../../config", config_name="main", version_base=None)
 def evaluate(config: DictConfig):
     mlflow.set_tracking_uri(config.mlflow_tracking_ui)
-    mlflow.set_experiment('employee-churn')
-    # os.environ["MLFLOW_TRACKING_USERNAME"] = config.mlflow_USERNAME
-    # os.environ["MLFLOW_TRACKING_PASSWORD"] = config.mlflow_PASSWORD
+    # mlflow.set_experiment('employee-churn')
+    os.environ["MLFLOW_TRACKING_USERNAME"] = config.mlflow_USERNAME
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = config.mlflow_PASSWORD
 
     with mlflow.start_run():
         # Load data and model
@@ -73,9 +73,9 @@ def evaluate(config: DictConfig):
         log_metrics(f1_score=f1, accuracy_score=accuracy)
 
         # Log in local dir
-        mlflow.sklearn.log_model(model, "model")
-        mlflow.log_metric("f1_score", f1)
-        mlflow.log_metric("accuracy_score", accuracy)
+        # mlflow.sklearn.log_model(model, "model")
+        # mlflow.log_metric("f1_score", f1)
+        # mlflow.log_metric("accuracy_score", accuracy)
 
 
 if __name__ == "__main__":
